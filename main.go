@@ -45,7 +45,7 @@ func Insert(db *gorm.DB) {
 }
 
 func Read(db *gorm.DB) {
-	var student []Student
+	var student []Student //Slice of Student struct
 	db.Find(&student)
 	fmt.Println("id name domain")
 	for _, student := range student {
@@ -53,3 +53,18 @@ func Read(db *gorm.DB) {
 	}
 }
 
+func Update(db *gorm.DB) {
+	fmt.Println("Enter the id:")
+	fmt.Scan(&id)
+	fmt.Println("Enter the name:")
+	fmt.Scan(&name)
+	fmt.Println("Enter new domain:")
+	fmt.Scan(&domain)
+
+	var student Student
+	db.First(&student, id)
+	student.Name = name
+	student.Domain = domain
+	db.Save(&student)
+	fmt.Println("Updated!!!")
+}
