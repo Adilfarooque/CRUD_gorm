@@ -68,3 +68,12 @@ func Update(db *gorm.DB) {
 	db.Save(&student)
 	fmt.Println("Updated!!!")
 }
+
+func Delete(db gorm.DB) {
+	fmt.Println("Enter the id:")
+	fmt.Scan(&id)
+	var student Student
+	db.First(&student, id)
+	db.Delete(&student)
+	fmt.Println("Deleted!!!")
+}
